@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in - UiChemy</title>
+    <style>
+      :root { color: #171717; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; background: #202020; }
+      button, input { font: inherit; }
+      button { cursor: pointer; }
+      .page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background-color: #202020; background-image: radial-gradient(#393939 1px, transparent 1px); background-size: 27px 27px; }
+      .login-shell { display: grid; grid-template-columns: minmax(420px, 1fr) minmax(480px, 560px); width: min(1140px, 100%); min-height: 760px; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 24px 60px rgb(0 0 0 / 28%); }
+      .login-form { display: flex; flex-direction: column; padding: 32px 84px 34px; }
+      .brand { display: inline-flex; align-items: center; gap: 9px; color: #080808; font-size: 20px; font-weight: 750; text-decoration: none; }
+      .logo { position: relative; width: 32px; height: 32px; display: grid; place-items: center; overflow: hidden; border-radius: 10px; background: linear-gradient(140deg, #ffdc8d, #ff7546 48%, #a355e7); color: #fff; font-family: Arial, sans-serif; font-size: 25px; font-weight: 900; }
+      .logo::after { content: ""; position: absolute; right: 7px; bottom: 7px; width: 5px; height: 5px; border-radius: 50%; background: #fff; }
+      .form-content { width: min(340px, 100%); margin: 80px auto 0; }
+      h1 { margin: 0; text-align: center; font-size: 25px; line-height: 1.25; letter-spacing: 0; }
+      .subhead { margin: 7px 0 26px; color: #64748b; text-align: center; font-size: 14px; }
+      .provider-button { width: 100%; height: 33px; display: flex; align-items: center; justify-content: center; gap: 11px; margin: 0 0 11px; border: 1px solid #d7d7d7; border-radius: 8px; color: #111; background: #fff; font-size: 14px; font-weight: 650; box-shadow: 0 1px 2px rgb(0 0 0 / 4%); }
+      .provider-button:hover { background: #fafafa; }
+      .provider-icon { width: 16px; height: 16px; display: grid; place-items: center; font-size: 18px; font-weight: 800; line-height: 1; }
+      .google { font-family: Arial, sans-serif; color: #1d1d1d; } .facebook { color: #171717; font-family: Arial, sans-serif; } .store { font-size: 15px; }
+      .divider { height: 1px; margin: 19px 0 21px; background: #ededed; }
+      .input-wrap { position: relative; margin-bottom: 11px; }
+      .input-wrap input { width: 100%; height: 34px; padding: 0 39px 0 13px; border: 1px solid #d7d7d7; border-radius: 8px; outline: none; color: #151515; font-size: 14px; }
+      .input-wrap input:focus { border-color: #ff7042; box-shadow: 0 0 0 3px rgb(255 112 66 / 14%); }
+      .input-wrap input::placeholder { color: #94a3b8; }
+      .password-toggle { position: absolute; top: 50%; right: 10px; width: 22px; height: 22px; transform: translateY(-50%); border: 0; color: #6b7280; background: transparent; }
+      .password-toggle svg { width: 16px; height: 16px; }
+      .form-options { display: flex; align-items: center; justify-content: space-between; margin: 3px 0 12px; font-size: 12px; }
+      .keep-signed { display: flex; align-items: center; gap: 7px; color: #1f2937; font-weight: 600; }
+      .keep-signed input { width: 18px; height: 18px; margin: 0; accent-color: #ff7042; }
+      .form-options a, .create-account { color: #64748b; font-weight: 650; text-decoration: none; }
+      .form-options a:hover, .create-account:hover { color: #ff7042; }
+      .login-button { width: 100%; height: 33px; border: 0; border-radius: 7px; color: #fff; background: #ff6b3d; box-shadow: inset 0 -1px rgb(0 0 0 / 12%); font-size: 14px; font-weight: 750; }
+      .login-button:hover { background: #f45d2d; }
+      .account-prompt { margin: 20px 0 0; padding-top: 20px; border-top: 1px solid #ededed; text-align: center; color: #64748b; font-size: 12px; }
+      .account-prompt strong { color: #111; }
+      .form-footer { display: flex; justify-content: space-between; margin-top: auto; color: #64748b; font-size: 12px; }
+      .form-footer a { color: inherit; text-decoration: none; } .footer-links { display: flex; gap: 13px; }
+      .showcase { position: relative; overflow: hidden; padding: 64px 68px 0; background: #171717; color: #fff; }
+      .showcase::after { content: ""; position: absolute; z-index: 0; right: -90px; bottom: -120px; left: -50px; height: 390px; background: radial-gradient(ellipse at 50% 56%, #ffd080 0, #ff7a49 30%, #ff5950 45%, #9237a7 67%, transparent 72%); filter: blur(10px); opacity: .98; }
+      .showcase-header { position: relative; z-index: 2; text-align: center; } .eyebrow { margin: 0 0 9px; color: #929292; font-size: 11px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; } .showcase h2 { margin: 0; font-size: 23px; letter-spacing: 0; } .showcase-header > p:last-child { max-width: 390px; margin: 8px auto 0; color: #b4b4b4; font-size: 13px; line-height: 1.45; }
+      .illustration { position: absolute; z-index: 1; top: 265px; right: 50%; width: 350px; transform: translateX(50%); }
+      .plugin-card { overflow: hidden; border: 2px solid #606060; border-radius: 15px; background: #f9f9fb; box-shadow: 0 15px 36px rgb(0 0 0 / 25%); }
+      .connection-header { height: 67px; display: grid; grid-template-columns: 36px 1fr 36px 1fr 36px; align-items: center; padding: 0 18px; background: #1b1b1b; } .tiny-mark { width: 29px; height: 29px; display: grid; place-items: center; justify-self: center; } .tiny-figma { transform: scale(.55); } .tiny-u { overflow: hidden; border-radius: 10px; background: linear-gradient(145deg, #ffe191, #ff754b 54%, #9855e9); color: #fff; font-family: Arial, sans-serif; font-size: 22px; font-weight: 900; } .tiny-elementor { border: 1px solid #303030; border-radius: 50%; color: #fff; font-size: 17px; font-weight: 800; } .tiny-line { border-top: 1px dotted #929292; }
+      .plugin-body { min-height: 360px; padding: 20px 18px 18px; color: #252525; background: #fff; } .plugin-body h3 { margin: 0; font-size: 16px; } .plugin-body > p { margin: 5px 0 0; color: #747474; font-size: 11px; line-height: 1.45; }
+      .mini-flow { display: grid; grid-template-columns: 1fr 22px 1fr; align-items: end; margin: 51px auto 0; max-width: 198px; } .flow-caption { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 7px; color: #7b7b7b; font-size: 8px; } .mini-wp { display: grid; place-items: center; width: 11px; height: 11px; border: 1px solid #3981aa; border-radius: 50%; color: #3981aa; font-family: Georgia, serif; font-size: 8px; font-weight: 800; } .flow-arrow { padding-bottom: 17px; color: #999; font-size: 23px; text-align: center; }
+      .mini-page { width: 88px; height: 76px; margin: 0 auto; padding: 8px; border: 1px solid #e4e4e4; border-radius: 8px; } .mini-toolbar { display: flex; gap: 4px; margin-bottom: 7px; } .mini-toolbar i { width: 7px; height: 7px; border-radius: 50%; } .mini-toolbar i:nth-child(1) { background: #f24e1e; } .mini-toolbar i:nth-child(2) { background: #a259ff; } .mini-toolbar i:nth-child(3) { background: #1abcfe; } .mini-row { height: 7px; margin-bottom: 6px; border-radius: 6px; background: #e9e8f1; } .mini-block { height: 18px; border-radius: 8px; background: #e7e6f2; } .mini-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 6px; } .mini-columns i { height: 8px; border-radius: 5px; background: #e9e8f1; } .mini-page.wp { padding-top: 8px; } .wp-bar { height: 12px; margin-bottom: 8px; border-radius: 7px; background: #222; } .wp-text { width: 37px; height: 17px; border-radius: 7px; background: #f0eef7; }
+      .plugin-proof { margin: 36px 0 0; text-align: center; font-size: 16px; font-weight: 750; line-height: 1.45; } .plugin-hint { margin: 7px 0 0; color: #a76d61; text-align: center; font-size: 10px; }
+      .dots { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 5px; width: 124px; height: 40px; margin: 18px auto 0; border: 1px solid rgb(255 255 255 / 18%); border-radius: 22px; background: rgb(37 27 29 / 48%); } .dots button { width: 5px; height: 5px; padding: 0; border: 0; border-radius: 50%; background: #d8a18e; } .dots button.active { width: 9px; border-radius: 5px; background: #fff; } .arrow-button { width: 23px !important; height: 23px !important; color: #fff; background: rgb(255 255 255 / 12%) !important; font-size: 18px; line-height: 1; }
+      .floating-logo { position: absolute; z-index: 3; display: grid; place-items: center; width: 78px; height: 78px; border-radius: 15px; background: #fff; box-shadow: 0 9px 22px rgb(0 0 0 / 24%); } .floating-logo.figma { top: 358px; left: 21px; } .floating-logo.wp { top: 487px; right: 18px; color: #365df8; font-family: Georgia, serif; font-size: 49px; font-weight: 700; transform: rotate(8deg); } .floating-logo .figma-dots { transform: scale(1.7); }
+      .figma-dots { position: relative; width: 26px; height: 38px; } .figma-dots i { position: absolute; width: 13px; height: 13px; border-radius: 50%; } .figma-dots i:nth-child(1) { top: 0; left: 0; border-radius: 7px 0 0 7px; background: #f24e1e; } .figma-dots i:nth-child(2) { top: 0; right: 0; border-radius: 0 7px 7px 0; background: #ff7262; } .figma-dots i:nth-child(3) { top: 13px; left: 0; border-radius: 7px 0 0 7px; background: #a259ff; } .figma-dots i:nth-child(4) { top: 13px; right: 0; background: #1abcfe; } .figma-dots i:nth-child(5) { bottom: 0; left: 0; background: #0acf83; }
+      .status { min-height: 18px; margin: 12px 0 0; color: #d95027; text-align: center; font-size: 12px; }
+      @media (max-width: 900px) { .login-shell { grid-template-columns: 1fr; max-width: 560px; } .login-form { min-height: 720px; padding-inline: 55px; } .showcase { min-height: 610px; } }
+      @media (max-width: 520px) { .page { padding: 0; background-image: none; } .login-shell { min-height: 100vh; border-radius: 0; } .login-form { min-height: 100vh; padding: 25px 26px; } .form-content { margin-top: 65px; } .showcase { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="login-shell" aria-label="UiChemy login">
+        <form class="login-form" id="login-form">
+          <a class="brand" href="#top" aria-label="UiChemy home"><span class="logo">u</span>UiChemy</a>
+          <div class="form-content">
+            <h1>Welcome to UiChemy</h1><p class="subhead">Log in or register to start your AI workflow</p>
+            <button class="provider-button" type="button"><span class="provider-icon google">G</span>Continue with Google</button>
+            <button class="provider-button" type="button"><span class="provider-icon facebook">f</span>Continue with Facebook</button>
+            <button class="provider-button" type="button"><span class="provider-icon store">&#9671;</span>Continue with Posimyth Store</button>
+            <button class="provider-button" type="button"><span class="provider-icon">&#9901;</span>Sign in with Passkey</button>
+            <div class="divider"></div>
+            <div class="input-wrap"><input id="email" type="email" autocomplete="email" placeholder="Email" required></div>
+            <div class="input-wrap"><input id="password" type="password" autocomplete="current-password" placeholder="Password" required><button class="password-toggle" id="password-toggle" type="button" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 3 18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10.8 10.8 0 0 1 12 4.9c5.1 0 8.7 4.4 9.7 6.1a1.9 1.9 0 0 1 0 2c-.4.6-1.1 1.6-2.1 2.6M6.6 6.6C4.3 8.1 2.9 10.4 2.3 11.4a1.9 1.9 0 0 0 0 2c1 1.7 4.6 6.1 9.7 6.1 1.3 0 2.5-.3 3.6-.7"/></svg></button></div>
+            <div class="form-options"><label class="keep-signed"><input type="checkbox">Keep me signed in</label><a href="#forgot">Forgot Password?</a></div>
+            <button class="login-button" type="submit">Login</button><p class="status" id="status" aria-live="polite"></p>
+            <p class="account-prompt">Don't have an account? <a class="create-account" href="#create"><strong>Create account</strong></a></p>
+          </div>
+          <footer class="form-footer"><span>&copy; 2026 UiChemy</span><span class="footer-links"><a href="#terms">Terms</a><span>&middot;</span><a href="#privacy">Privacy</a></span></footer>
+        </form>
+        <aside class="showcase" aria-label="Figma to WordPress product preview">
+          <header class="showcase-header"><p class="eyebrow">Design to WordPress</p><h2>Figma to WordPress</h2><p>Convert any Figma design into native, editable WordPress.<br>No rebuild, no lock-in.</p></header>
+          <div class="floating-logo figma"><div class="figma-dots"><i></i><i></i><i></i><i></i><i></i></div></div><div class="floating-logo wp">W</div>
+          <div class="illustration"><div class="plugin-card"><div class="connection-header"><div class="tiny-mark tiny-figma"><div class="figma-dots"><i></i><i></i><i></i><i></i><i></i></div></div><div class="tiny-line"></div><div class="tiny-mark tiny-u">u</div><div class="tiny-line"></div><div class="tiny-mark tiny-elementor">E</div></div><div class="plugin-body"><h3>Welcome to UiChemy</h3><p>Turn your Figma designs into live, editable Elementor pages in WordPress.</p><div class="mini-flow"><div><div class="flow-caption"><span class="mini-mark">F</span>Figma</div><div class="mini-page"><div class="mini-toolbar"><i></i><i></i><i></i></div><div class="mini-row"></div><div class="mini-block"></div><div class="mini-columns"><i></i><i></i></div></div></div><div class="flow-arrow">&#8594;</div><div><div class="flow-caption"><span class="mini-wp">W</span>WordPress</div><div class="mini-page wp"><div class="wp-bar"></div><div class="wp-text"></div></div></div></div><p class="plugin-proof">Join 90,000+ designers converting<br>Figma to Elementor.</p><p class="plugin-hint">Sign in to get started.</p></div></div><div class="dots"><button class="arrow-button" type="button">&#8249;</button><button class="active" type="button" aria-label="Slide 1"></button><button type="button" aria-label="Slide 2"></button><button type="button" aria-label="Slide 3"></button><button type="button" aria-label="Slide 4"></button><button class="arrow-button" type="button">&#8250;</button></div></div>
+        </aside>
+      </section>
+    </main>
+    <script>
+      const form = document.getElementById('login-form'); const password = document.getElementById('password'); const toggle = document.getElementById('password-toggle'); const status = document.getElementById('status');
+      toggle.addEventListener('click', () => { const showing = password.type === 'text'; password.type = showing ? 'password' : 'text'; toggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password'); });
+      form.addEventListener('submit', (event) => { event.preventDefault(); status.textContent = 'Authentication will be connected to your UiChemy account service.'; });
+    </script>
+  </body>
+</html>
